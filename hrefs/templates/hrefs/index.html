@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Список ссылок{% endblock %}
+{% block title2 %}Список ссылок{% endblock %}
+
+{% block content %}
+
+    {% if all_hrefs_list %}
+        <div class="table-responsive">
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th>№</th>
+                <th>Название ссылки</th>
+                <th>Периодичность проверки</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for href in all_hrefs_list %}
+              <tr>
+                <td>{{ href.id }}</td>
+                <td><a href="{% url 'hrefs:href-view' href.id %}">{{ href.href_name }}</a></td>
+                <td>30 дней</td>
+                <td>
+                  <a href="{% url 'hrefs:href-delete' href.id %}" class="btn-del"><i data-feather="x"></i>Удалить</a>
+                </td>
+                <td>
+                  <a href="{% url 'hrefs:href-edit' href.id %}" class="btn-chng"><i data-feather="settings"></i>Изменить</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        
+    {% else %}
+        <p>Ссылок нет</p>
+    {% endif %}
+
+{% endblock %}
